@@ -1,6 +1,5 @@
 <script>
   import SpotifyUser from "../SpotifyUser.svelte";
-  import SpotifyWidget from "../SpotifyWidget.svelte";
 </script>
 
 <svelte:head>

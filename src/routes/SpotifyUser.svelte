@@ -91,8 +91,8 @@
 </script>
 
 {#if profile}
+<p class="text-4xl font-bold">Logged in as <span>{profile?.display_name}</span></p>
   <section id="profile" class:invisible={profile === null}>
-    <h2>Logged in as <span>{profile?.display_name}</span></h2>
     {#if profile?.images[0]}
       <img src={profile.images[0].url} alt="Profile image" width="200" height="200"/>
       <p>
