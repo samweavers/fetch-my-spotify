@@ -1,5 +1,4 @@
 import { checkAuth } from '$lib/auth'
-import { browser } from '$app/environment'
 
 export async function load({ url }) {
   if (typeof window !== 'undefined') {

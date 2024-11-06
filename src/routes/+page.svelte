@@ -1,6 +1,10 @@
 <script>
-  export let data
-  $: profile = false
+  import { onMount } from 'svelte'
+  import { profile } from '$lib/stores'
+
+  onMount(() => {
+    profile.set(null)
+  })
 </script>
 
 <svelte:head>

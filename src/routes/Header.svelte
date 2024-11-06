@@ -1,13 +1,15 @@
 <script>
   import { profile } from '$lib/stores'
+  import { topTracks } from '$lib/stores'
+  import { tokenable } from '$lib/stores'
   import { page } from '$app/stores'
   import spotify from '$lib/images/spotify.svg'
   import { checkAuth } from '$lib/auth'
   import { onMount } from 'svelte'
 
-  onMount(() => {
-    console.log('Component mounted, profile value:', $profile)
-  })
+  // onMount(() => {
+  //   console.log('accessToken', $tokenable)
+  // })
 
   async function callCheckProfile() {
     if (!$profile) {
@@ -31,7 +33,6 @@
       aria-current={$page.url.pathname === '/' ? 'page' : undefined}
     >
       {#if $profile}
-        {@const profileDebug = console.log('Profile value:', $profile)}
         <img
           class="rounded-full"
           src={$profile.images[0].url}
@@ -41,7 +42,7 @@
         />
       {:else}
         <button class="btn" on:click={callCheckProfile}
-          >click me to connect</button
+          >Connect to Spotify</button
         >
       {/if}
     </li>

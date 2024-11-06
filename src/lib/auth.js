@@ -1,4 +1,6 @@
 import { profile } from '$lib/stores' // Import the store
+import { tokenable } from '$lib/stores' // Import the store
+import { topTracks } from '$lib/stores' // Import the store
 export const clientId = '889446bf020f4a75b316332f03e4efb5'
 
 export async function checkAuth() {
@@ -9,8 +11,12 @@ export async function checkAuth() {
     return null
   } else {
     const accessToken = await getAccessToken(clientId, code)
+    tokenable.set(accessToken)
     const profileData = await fetchProfile(accessToken)
-    profile.set(profileData) // Update the store directly
+    profile.set(profileData)
+    const profileTopTracks = await fetchTopTracks(accessToken)
+    topTracks.set(profileTopTracks)
+
     return profileData
   }
 }
@@ -25,7 +31,7 @@ export async function redirectToAuthCodeFlow(clientId) {
   params.append('client_id', clientId)
   params.append('response_type', 'code')
   params.append('redirect_uri', 'http://localhost:5173/callback')
-  params.append('scope', 'user-read-private user-read-email')
+  params.append('scope', 'user-read-private user-read-email user-top-read')
   params.append('code_challenge_method', 'S256')
   params.append('code_challenge', challenge)
 
@@ -70,17 +76,29 @@ export async function getAccessToken(clientId, code) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params
   })
-
   const { access_token } = await result.json()
   return access_token
 }
 
 // Fetch the user's profile data from Spotify
 export async function fetchProfile(token) {
+  console.log('fetchProfileToken:', token)
   const result = await fetch('https://api.spotify.com/v1/me', {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` }
   })
 
+  return await result.json()
+}
+
+export async function fetchTopTracks(token) {
+  console.log('topTracksToken:', token)
+  const result = await fetch(
+    'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10&offset=5',
+    {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  )
   return await result.json()
 }
