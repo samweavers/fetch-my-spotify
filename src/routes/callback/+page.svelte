@@ -33,14 +33,21 @@
 {#if $topTracks}
   <section class="grid gap-8" id="profile" class:invisible={profile === null}>
     <p class="text-4xl font-bold text-center">Top Tracks:</p>
-    <ul>
-      {#each $topTracks.items as track}
+    <ul class="grid gap-4">
+      {#each $topTracks.items as track, i}
         <li class="">
-          <span>{track.name}</span>
-          by
-          {#each track.artists as artist}
-            <span>{artist.name}</span>
-          {/each}
+          <a
+            class="p-4 border-[1px] border-zinc-700 grid grid-cols-3"
+            href={track.external_urls.spotify}
+          >
+            <span>{i + 1}</span>
+            <span>{track.name}</span>
+            {#each track.artists as artist, i}
+              <span class="">
+                {artist.name}{i < track.artists.length - 1 ? ', ' : ''}</span
+              >
+            {/each}
+          </a>
         </li>
       {/each}
     </ul>

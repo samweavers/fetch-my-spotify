@@ -17,7 +17,7 @@
     <slot />
   </main>
   <footer>
-    <p>Sam Weavers</p>
+    <p>🤓 Sam Weavers</p>
   </footer>
 </div>
 

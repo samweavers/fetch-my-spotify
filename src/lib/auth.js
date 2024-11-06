@@ -94,7 +94,7 @@ export async function fetchProfile(token) {
 export async function fetchTopTracks(token) {
   console.log('topTracksToken:', token)
   const result = await fetch(
-    'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10&offset=5',
+    'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=20&offset=0',
     {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` }
