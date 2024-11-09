@@ -12,7 +12,7 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-{#if profile}
+<!-- {#if profile}
   <section class="grid gap-8" id="profile" class:invisible={profile === null}>
     <p class="text-4xl font-bold text-center">
       Logged in as <span>{profile.display_name}</span>
@@ -28,7 +28,7 @@
   </section>
 {:else}
   <p>Loading Profile...</p>
-{/if}
+{/if} -->
 
 {#if $topTracks}
   <section class="grid gap-8" id="profile" class:invisible={profile === null}>
@@ -36,17 +36,19 @@
     <ul class="grid gap-4">
       {#each $topTracks.items as track, i}
         <li class="">
-          <a
-            class="p-4 border-[1px] border-zinc-700 grid grid-cols-3"
-            href={track.external_urls.spotify}
-          >
-            <span>{i + 1}</span>
-            <span>{track.name}</span>
-            {#each track.artists as artist, i}
-              <span class="">
-                {artist.name}{i < track.artists.length - 1 ? ', ' : ''}</span
-              >
-            {/each}
+          <a class="flex items-center w-full bg-base justify-between rounded-lg py-2 px-6 gap-4 hover:brightness-150"
+            href={track.external_urls.spotify} target="_blank">
+            <span class="text-lg">{i + 1}</span>
+            <img src={track.album.images[0].url} alt="" width="75" />
+            <div class="flex flex-col gap-2 w-full">
+              <span class="text-lg">{track.name}</span>
+              <span class="text-zinc-400">
+                {#each track.artists as artist, i}
+                  {artist.name}{i < track.artists.length - 1 ? ', ' : ''}
+                {/each}
+              </span>
+            </div>
+            <span class="whitespace-nowrap self-center w-max">{track.album.name}</span>
           </a>
         </li>
       {/each}

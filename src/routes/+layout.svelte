@@ -13,7 +13,7 @@
 
 <div class="app">
   <Header />
-  <main>
+  <main class="bg-elevated w-full py-12 gap-20 px-8 rounded-3xl grid items-start max-w-[98%] mx-auto">
     <slot />
   </main>
   <footer>
@@ -26,13 +26,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-  }
-  main {
-    @apply bg-base mx-4 rounded-xl;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
   }
   footer {
     display: flex;

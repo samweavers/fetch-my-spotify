@@ -6,6 +6,7 @@ export default {
       colors: {
         'dark': '#000000',
         'base': '#121212',
+        'elevated': '#161616'
       },
     },
   },
