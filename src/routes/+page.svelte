@@ -14,7 +14,6 @@
 
 <section>
   <h1>Display your Spotify profile data</h1>
-  <p>a test by Sam Weavers</p>
 </section>
 
 <style>

@@ -1,10 +1,22 @@
 <script>
-  import { topTracks } from '$lib/stores'
+  import { fetchTopItems } from '$lib/auth'
+  import { tokenable, topTracks, topSearch } from '$lib/stores'
+  import { get } from 'svelte/store'
 
   export let data
-  $: profile = data.profile
 
-  console.log($topTracks)
+  // topSearch.type
+  // topSearch.timeRange
+  // topSearch.limit
+
+  // Fetch top tracks every time topSearch changes
+  async function getTopResults() {
+    const fetchedTopResults = await fetchTopItems(get(tokenable))
+    topTracks.set(fetchedTopResults)
+  }
+
+  $: getTopResults(), $topSearch
+  $: profile = data.profile
 </script>
 
 <svelte:head>
@@ -12,32 +24,40 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<!-- {#if profile}
+{#if $topTracks && typeof window !== 'undefined'}
   <section class="grid gap-8" id="profile" class:invisible={profile === null}>
-    <p class="text-4xl font-bold text-center">
-      Logged in as <span>{profile.display_name}</span>
-    </p>
-    <ul>
-      <li>User ID: {profile.id}</li>
-      <li>Email: {profile.email}</li>
-      <li>
-        Spotify URI: <a href={profile.external_urls.spotify}>{profile.uri}</a>
-      </li>
-      <li>Link: <a href={profile.href}>{profile.href}</a></li>
-    </ul>
-  </section>
-{:else}
-  <p>Loading Profile...</p>
-{/if} -->
-
-{#if $topTracks}
-  <section class="grid gap-8" id="profile" class:invisible={profile === null}>
-    <p class="text-4xl font-bold text-center">Top Tracks:</p>
+    <h1>Top Tracks:</h1>
+    <section class="grid gap-8">
+      <article class="flex gap-4">
+        <div class="grid place-items-center">
+          <div class="select">
+            <select bind:value={$topSearch.timeRange}>
+              <option value="long_term">Long Term</option>
+              <option value="medium_term">Medium Term</option>
+              <option value="short_term">Short Term</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid place-items-center">
+          <select bind:value={$topSearch.limit}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+      </article>
+    </section>
     <ul class="grid gap-4">
       {#each $topTracks.items as track, i}
         <li class="">
-          <a class="flex items-center w-full bg-base justify-between rounded-lg py-2 px-6 gap-4 hover:brightness-150"
-            href={track.external_urls.spotify} target="_blank">
+          <a
+            class="flex items-center w-full bg-base justify-between rounded-lg py-2 px-6 transition-all ease gap-4 hover:brightness-125 hover:scale-[102%]"
+            href={track.external_urls.spotify}
+            target="_blank"
+          >
             <span class="text-lg">{i + 1}</span>
             <img src={track.album.images[0].url} alt="" width="75" />
             <div class="flex flex-col gap-2 w-full">
@@ -48,14 +68,15 @@
                 {/each}
               </span>
             </div>
-            <span class="whitespace-nowrap self-center w-max">{track.album.name}</span>
+            <span class="self-center whitespace-nowrap">{track.album.name}</span
+            >
           </a>
         </li>
       {/each}
     </ul>
   </section>
 {:else}
-  <p>Loading Profile...</p>
+  <p class="text-center text-xl">Loading Profile...</p>
 {/if}
 
 <style>

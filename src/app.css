@@ -37,12 +37,11 @@ p {
 }
 
 h1 {
-	font-size: 2rem;
-	text-align: center;
+	@apply text-4xl font-bold text-center;
 }
 
 h2 {
-	font-size: 1rem;
+	@apply text-2xl font-bold;
 }
 
 pre {
@@ -99,4 +98,9 @@ button:focus:not(:focus-visible) {
 
 .nav-item {
 	@apply list-none;
+}
+
+select {
+	@apply rounded-lg block w-full py-3 px-4
+	bg-elevated border-gray-600 placeholder-gray-400 text-white focus:ring-green-500 focus:border-green-500
 }

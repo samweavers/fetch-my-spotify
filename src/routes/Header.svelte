@@ -5,11 +5,6 @@
   import { page } from '$app/stores'
   import spotify from '$lib/images/spotify.svg'
   import { checkAuth } from '$lib/auth'
-  import { onMount } from 'svelte'
-
-  // onMount(() => {
-  //   console.log('accessToken', $tokenable)
-  // })
 
   async function callCheckProfile() {
     if (!$profile) {

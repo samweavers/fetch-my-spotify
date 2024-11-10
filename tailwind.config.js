@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark': '#000000',
-        'base': '#121212',
-        'elevated': '#161616'
-      },
-    },
+        dark: '#181818',
+        base: '#0E0E0E',
+        elevated: '#111111'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

@@ -1,6 +1,5 @@
-import { profile } from '$lib/stores' // Import the store
-import { tokenable } from '$lib/stores' // Import the store
-import { topTracks } from '$lib/stores' // Import the store
+import { tokenable, topTracks, topSearch, profile } from '$lib/stores'
+import { get } from 'svelte/store'
 export const clientId = '889446bf020f4a75b316332f03e4efb5'
 
 export async function checkAuth() {
@@ -14,7 +13,7 @@ export async function checkAuth() {
     tokenable.set(accessToken)
     const profileData = await fetchProfile(accessToken)
     profile.set(profileData)
-    const profileTopTracks = await fetchTopTracks(accessToken)
+    const profileTopTracks = await fetchTopItems(accessToken)
     topTracks.set(profileTopTracks)
 
     return profileData
@@ -91,10 +90,10 @@ export async function fetchProfile(token) {
   return await result.json()
 }
 
-export async function fetchTopTracks(token) {
-  console.log('topTracksToken:', token)
+export async function fetchTopItems(token) {
+  const { timeRange, limit } = get(topSearch)
   const result = await fetch(
-    'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=20&offset=0',
+    `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}&offset=0`,
     {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` }
