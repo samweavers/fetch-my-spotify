@@ -54,21 +54,21 @@
       {#each $topTracks.items as track, i}
         <li class="">
           <a
-            class="flex items-center w-full bg-base justify-between rounded-lg py-2 px-6 transition-all ease gap-4 hover:brightness-125 hover:scale-[102%]"
+            class="flex flex-col lg:flex-wrap items-center w-full bg-base justify-between rounded-lg transition-all ease gap-4 hover:brightness-125 hover:scale-[102%] p-8 lg:py-2 lg:px-6"
             href={track.external_urls.spotify}
             target="_blank"
           >
             <span class="text-lg">{i + 1}</span>
             <img src={track.album.images[0].url} alt="" width="75" />
             <div class="flex flex-col gap-2 w-full">
-              <span class="text-lg">{track.name}</span>
-              <span class="text-zinc-400">
+              <span class="text-lg text-center lg:text-left">{track.name}</span>
+              <span class="text-zinc-400 text-center lg:text-left">
                 {#each track.artists as artist, i}
                   {artist.name}{i < track.artists.length - 1 ? ', ' : ''}
                 {/each}
               </span>
             </div>
-            <span class="self-center whitespace-nowrap">{track.album.name}</span
+            <span class="self-center lg:whitespace-nowrap">{track.album.name}</span
             >
           </a>
         </li>

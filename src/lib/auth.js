@@ -31,7 +31,7 @@ export async function redirectToAuthCodeFlow(clientId) {
   params.append('response_type', 'code')
   params.append(
     'redirect_uri',
-    'https://spotify-fetch-top-items.pages.dev/callback'
+    'http://localhost:5173/callback'
   )
   params.append('scope', 'user-read-private user-read-email user-top-read')
   params.append('code_challenge_method', 'S256')
@@ -72,7 +72,7 @@ export async function getAccessToken(clientId, code) {
   params.append('code', code)
   params.append(
     'redirect_uri',
-    'https://spotify-fetch-top-items.pages.dev/callback'
+    'http://localhost:5173/callback'
   )
   params.append('code_verifier', verifier)
 
