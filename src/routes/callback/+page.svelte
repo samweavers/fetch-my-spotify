@@ -54,7 +54,7 @@
       {#each $topTracks.items as track, i}
         <li class="">
           <a
-            class="flex flex-col lg:flex-wrap items-center w-full bg-base justify-between rounded-lg transition-all ease gap-4 hover:brightness-125 hover:scale-[102%] p-8 lg:py-2 lg:px-6"
+            class="flex flex-col lg:flex-row items-center w-full bg-base justify-between rounded-lg transition-all ease gap-4 hover:brightness-125 hover:scale-[102%] p-8 lg:py-2 lg:px-6"
             href={track.external_urls.spotify}
             target="_blank"
           >
