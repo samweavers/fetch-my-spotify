@@ -32,9 +32,9 @@
         <div class="grid place-items-center">
           <div class="select">
             <select bind:value={$topSearch.timeRange}>
-              <option value="long_term">Long Term</option>
-              <option value="medium_term">Medium Term</option>
-              <option value="short_term">Short Term</option>
+              <option value="short_term">Last 4 Weeks</option>
+              <option value="medium_term">Last 6 Months</option>
+              <option value="long_term">1 Year +</option>
             </select>
           </div>
         </div>
