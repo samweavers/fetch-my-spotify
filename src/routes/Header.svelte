@@ -1,7 +1,5 @@
 <script>
   import { profile } from '$lib/stores'
-  import { topTracks } from '$lib/stores'
-  import { tokenable } from '$lib/stores'
   import { page } from '$app/stores'
   import spotify from '$lib/images/spotify.svg'
   import { checkAuth } from '$lib/auth'
@@ -15,6 +13,8 @@
       console.log('Fetched profile data:', profileData)
     }
   }
+
+  console.log($profile)
 </script>
 
 <header class="">
@@ -24,7 +24,9 @@
     </a>
 
     {#if $profile}
-      <span class="flex gap-4 items-center"><p class="text-2xl font-bold">{$profile.display_name}</p>
+      <span class="flex gap-4 items-center"
+        ><p class="text-2xl font-bold">{$profile.display_name}</p>
+        <p class="font-bold">({$profile.followers.total} followers)</p>
         <!-- <a class="text-zinc-400 text-sm" href="#"></a> -->
       </span>
     {/if}

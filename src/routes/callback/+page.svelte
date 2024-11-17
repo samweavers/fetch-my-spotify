@@ -5,10 +5,6 @@
 
   export let data
 
-  // topSearch.type
-  // topSearch.timeRange
-  // topSearch.limit
-
   // Fetch top tracks every time topSearch changes
   async function getTopResults() {
     const fetchedTopResults = await fetchTopItems(get(tokenable))
@@ -49,9 +45,12 @@
           </select>
         </div>
       </article>
+      <p class="text-lg">
+        Displaying top {$topSearch.limit} tracks from the {$topSearch.timeRange}
+      </p>
     </section>
     <ul class="grid gap-4">
-      {#each $topTracks.items as track, i}
+      <!-- {#each $topTracks?.items as track, i}
         <li class="">
           <a
             class="flex flex-col lg:flex-row items-center w-full bg-base justify-between rounded-lg transition-all ease gap-4 hover:brightness-125 hover:scale-[102%] p-8 lg:py-2 lg:px-6"
@@ -68,11 +67,12 @@
                 {/each}
               </span>
             </div>
-            <span class="self-center lg:whitespace-nowrap">{track.album.name}</span
+            <span class="self-center lg:whitespace-nowrap"
+              >{track.album.name}</span
             >
           </a>
         </li>
-      {/each}
+      {/each} -->
     </ul>
   </section>
 {:else}

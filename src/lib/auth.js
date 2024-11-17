@@ -32,8 +32,12 @@ export async function redirectToAuthCodeFlow(clientId) {
   params.append(
     'redirect_uri',
     'https://spotify-fetch-top-items.pages.dev/callback'
+    // 'http://localhost:5173/callback'
   )
-  params.append('scope', 'user-read-private user-read-email user-top-read')
+  params.append(
+    'scope',
+    'user-read-private user-read-email user-top-read playlist-read-private user-library-read'
+  )
   params.append('code_challenge_method', 'S256')
   params.append('code_challenge', challenge)
 
@@ -73,6 +77,7 @@ export async function getAccessToken(clientId, code) {
   params.append(
     'redirect_uri',
     'https://spotify-fetch-top-items.pages.dev/callback'
+    // 'http://localhost:5173/callback'
   )
   params.append('code_verifier', verifier)
 
@@ -99,11 +104,15 @@ export async function fetchProfile(token) {
 export async function fetchTopItems(token) {
   const { timeRange, limit } = get(topSearch)
   const result = await fetch(
-    `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}&offset=0`,
+    // `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}&offset=0`,
+    'https://api.spotify.com/v1/me/tracks?market=CA&limit=50&offset=0',
     {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` }
     }
   )
-  return await result.json()
+  const data = await result.json()
+  console.log(data) // Logs the actual JSON data from the API
+
+  return data
 }
