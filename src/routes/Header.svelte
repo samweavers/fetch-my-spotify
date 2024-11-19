@@ -26,7 +26,7 @@
     {#if $profile}
       <span class="flex gap-4 items-center"
         ><p class="text-2xl font-bold">{$profile.display_name}</p>
-        <p class="font-bold">({$profile.followers.total} followers)</p>
+        <!-- <p class="font-bold">({$profile.followers.total} followers)</p> -->
         <!-- <a class="text-zinc-400 text-sm" href="#"></a> -->
       </span>
     {/if}

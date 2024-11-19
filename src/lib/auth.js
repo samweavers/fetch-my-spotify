@@ -2,6 +2,10 @@ import { tokenable, topTracks, topSearch, profile } from '$lib/stores'
 import { get } from 'svelte/store'
 export const clientId = '889446bf020f4a75b316332f03e4efb5'
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export async function checkAuth() {
   const params = new URLSearchParams(window.location.search)
   const code = params.get('code')
@@ -104,15 +108,16 @@ export async function fetchProfile(token) {
 export async function fetchTopItems(token) {
   const { timeRange, limit } = get(topSearch)
   const result = await fetch(
-    // `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}&offset=0`,
-    'https://api.spotify.com/v1/me/tracks?market=CA&limit=50&offset=0',
+    `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}&offset=0`,
+    // 'https://api.spotify.com/v1/me/tracks?market=CA&limit=50&offset=0',
     {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` }
     }
   )
   const data = await result.json()
-  console.log(data) // Logs the actual JSON data from the API
+
+  await delay(1500) // Delay for 2 seconds
 
   return data
 }

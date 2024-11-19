@@ -1,4 +1,6 @@
 <script>
+  import Spinner from '$lib/Spinner.svelte'
+
   import { fetchTopItems } from '$lib/auth'
   import { tokenable, topTracks, topSearch } from '$lib/stores'
   import { get } from 'svelte/store'
@@ -28,9 +30,9 @@
         <div class="grid place-items-center">
           <div class="select">
             <select bind:value={$topSearch.timeRange}>
-              <option value="short_term">Last 4 Weeks</option>
-              <option value="medium_term">Last 6 Months</option>
-              <option value="long_term">1 Year +</option>
+              <option value="short_term">4 Weeks</option>
+              <option value="medium_term">6 Months</option>
+              <option value="long_term">1 Year</option>
             </select>
           </div>
         </div>
@@ -50,7 +52,7 @@
       </p>
     </section>
     <ul class="grid gap-4">
-      <!-- {#each $topTracks?.items as track, i}
+      {#each $topTracks?.items as track, i}
         <li class="">
           <a
             class="flex flex-col lg:flex-row items-center w-full bg-base justify-between rounded-lg transition-all ease gap-4 hover:brightness-125 hover:scale-[102%] p-8 lg:py-2 lg:px-6"
@@ -72,11 +74,14 @@
             >
           </a>
         </li>
-      {/each} -->
+      {/each}
     </ul>
   </section>
 {:else}
-  <p class="text-center text-xl">Loading Profile...</p>
+  <section class="grid place-items-center text-center gap-8">
+    <Spinner />
+    <p class="text-center text-xl">Loading Profile...</p>
+  </section>
 {/if}
 
 <style>
