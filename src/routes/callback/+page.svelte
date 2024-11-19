@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-  <title>Home</title>
+  <title>Your Top Tracks - Spotify Fetch</title>
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
