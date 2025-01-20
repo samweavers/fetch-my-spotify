@@ -48,7 +48,12 @@
         </div>
       </article>
       <p class="text-lg">
-        Displaying top {$topSearch.limit} tracks from the {$topSearch.timeRange}
+        Displaying top {$topSearch.limit} tracks from the last
+        {$topSearch.timeRange === 'short_term'
+          ? '4 weeks'
+          : $topSearch.timeRange === 'medium_term'
+            ? '6 months'
+            : '1 year'}
       </p>
     </section>
     <ul class="grid gap-4">
