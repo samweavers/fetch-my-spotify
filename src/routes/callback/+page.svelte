@@ -26,16 +26,10 @@
   <section class="grid gap-8" id="profile" class:invisible={profile === null}>
     <h1>Top Tracks:</h1>
     <section class="grid gap-8">
-      <article class="flex gap-4">
-        <div class="grid place-items-center">
-          <div class="select">
-            <select bind:value={$topSearch.timeRange}>
-              <option value="short_term">4 Weeks</option>
-              <option value="medium_term">6 Months</option>
-              <option value="long_term">1 Year</option>
-            </select>
-          </div>
-        </div>
+      <article
+        class="flex flex-wrap justify-center gap-4 items-center text-xl font-bold"
+      >
+        <p class="font-bold">Displaying your top</p>
         <div class="grid place-items-center">
           <select bind:value={$topSearch.limit}>
             <option value="5">5</option>
@@ -46,15 +40,26 @@
             <option value="50">50</option>
           </select>
         </div>
+        <p class="font-bold">tracks,</p>
+        <p class="font-bold">from the last</p>
+        <div class="grid place-items-center">
+          <div class="select">
+            <select bind:value={$topSearch.timeRange}>
+              <option value="short_term">4 Weeks</option>
+              <option value="medium_term">6 Months</option>
+              <option value="long_term">1 Year</option>
+            </select>
+          </div>
+        </div>
       </article>
-      <p class="text-lg">
+      <!-- <p class="text-lg">
         Displaying top {$topSearch.limit} tracks from the last
         {$topSearch.timeRange === 'short_term'
           ? '4 weeks'
           : $topSearch.timeRange === 'medium_term'
             ? '6 months'
             : '1 year'}
-      </p>
+      </p> -->
     </section>
     <ul class="grid gap-4">
       {#each $topTracks?.items as track, i}
