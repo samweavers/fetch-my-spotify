@@ -13,7 +13,9 @@
 
 <div class="app bg-elevated">
   <Header />
-  <main class="bg-dark w-full py-12 gap-20 px-8 rounded-3xl grid items-start max-w-[98%] mx-auto">
+  <main
+    class="bg-dark w-full py-12 gap-20 px-8 rounded-3xl grid items-center max-w-[98%] mx-auto flex-1"
+  >
     <slot />
   </main>
   <footer>

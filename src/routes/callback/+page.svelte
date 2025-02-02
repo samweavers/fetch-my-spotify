@@ -19,7 +19,7 @@
 
 <svelte:head>
   <title>Your Top Tracks - Spotify Fetch</title>
-  <meta name="description" content="Svelte demo app" />
+  <meta name="description" content="Fetch your top items on" />
 </svelte:head>
 
 {#if $topTracks && typeof window !== 'undefined'}

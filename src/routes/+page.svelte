@@ -12,9 +12,7 @@
   <meta name="description" content="Fetch your top" />
 </svelte:head>
 
-<section>
-  <h1>Display your Spotify profile data</h1>
-</section>
+<h1>Login to Spotify</h1>
 
 <style>
   section {
